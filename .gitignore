@@ -20,7 +20,7 @@ dist-ssr
 
 # Local database files
 mongodb-data
-data/
+/data/
 .mongodb/
 *.db
 
