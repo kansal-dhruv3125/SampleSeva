@@ -5,6 +5,9 @@
   "type": "module",
   "description": "SampleSeva backend — Express + MongoDB REST API (Phase 5B scaffold)",
   "main": "dist/server.js",
+  "engines": {
+    "node": ">=20.19.0"
+  },
   "scripts": {
     "dev": "tsx watch src/server.ts",
     "build": "tsc -p tsconfig.json",

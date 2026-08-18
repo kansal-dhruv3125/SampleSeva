@@ -29,7 +29,7 @@ export interface AuthTokenPayload {
 export function authCookieOptions(): CookieOptions {
   return {
     httpOnly: true,
-    sameSite: "lax",
+    sameSite: env.isProd ? "none" : "lax",
     secure: env.isProd,
     path: "/",
     maxAge: SESSION_MAX_AGE_MS,
@@ -73,3 +73,4 @@ export function normalizePhone(value: string | undefined): string | undefined {
   const cleaned = value.replace(/[\s-]/g, "");
   return cleaned || undefined;
 }
+
