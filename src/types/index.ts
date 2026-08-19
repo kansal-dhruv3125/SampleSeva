@@ -193,7 +193,7 @@ export interface AuthUser {
   name: string;
   email: string;
   phone?: string;
-  role?: "customer" | "lab_admin" | "platform_admin";
+  role?: "customer" | "lab" | "admin";
   createdAt: string;
 }
 

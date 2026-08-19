@@ -9,6 +9,7 @@ import { labsRouter } from "./labs.routes.js";
 import { labOfferingsRouter } from "./labOfferings.routes.js";
 import { bookingsRouter } from "./bookings.routes.js";
 import { addressRouter } from "./address.routes.js";
+import { adminRouter } from "./admin.routes.js";
 
 /**
  * API router. Health + catalogue endpoints (Phase 5F) are live; auth/users/
@@ -18,6 +19,7 @@ export const apiRouter = Router();
 
 apiRouter.use(healthRouter); // GET /api/health
 apiRouter.use("/auth", authRouter); // Phase 5G — signup/login/logout/me
+apiRouter.use("/admin", adminRouter); // Admin panel endpoints
 apiRouter.use("/users", usersRouter); // Phase 5I (later)
 apiRouter.use("/categories", categoriesRouter); // Phase 5F
 apiRouter.use("/tests", testsRouter); // Phase 5F

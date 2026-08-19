@@ -1,7 +1,11 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
 import { RequireAuth } from "./components/auth/RequireAuth";
+import { RequireRole } from "./components/auth/RequireRole";
 import { Layout } from "./components/layout/Layout";
+import { AdminLayout } from "./components/admin/AdminLayout";
+import { AdminLoginPage } from "./pages/admin/AdminLoginPage";
+import { AdminDashboardPage } from "./pages/admin/AdminDashboardPage";
 import { HomePage } from "./pages/HomePage";
 import { TestsPage } from "./pages/TestsPage";
 import { TestDetailsPage } from "./pages/TestDetailsPage";
@@ -28,6 +32,20 @@ export default function App() {
     <AuthProvider>
       <BrowserRouter>
         <Routes>
+          {/* Admin panel — separate layout, no customer nav/footer */}
+          <Route path="admin" element={<AdminLayout />}>
+            <Route path="login" element={<AdminLoginPage />} />
+            <Route
+              path="dashboard"
+              element={
+                <RequireRole allowedRoles={["admin"]}>
+                  <AdminDashboardPage />
+                </RequireRole>
+              }
+            />
+          </Route>
+
+          {/* Customer-facing site */}
           <Route element={<Layout />}>
             <Route index element={<HomePage />} />
             <Route path="tests" element={<TestsPage />} />

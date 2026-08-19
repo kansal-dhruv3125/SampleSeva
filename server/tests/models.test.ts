@@ -56,7 +56,7 @@ test("User: phone may be omitted", () => {
 });
 
 test("User: invalid role is rejected", () => {
-  const user = new User({ name: "A", email: "a@b.co", phone: "9876543210", passwordHash: "h", role: "admin" });
+  const user = new User({ name: "A", email: "a@b.co", phone: "9876543210", passwordHash: "h", role: "superadmin" });
   assert.ok(user.validateSync()?.errors["role"]);
 });
 

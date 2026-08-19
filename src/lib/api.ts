@@ -336,3 +336,75 @@ export function setDefaultAddress(id: string): Promise<SavedAddress> {
     (r) => r.address,
   );
 }
+
+// --- Admin API functions (Phase 1) --------------------------------------------
+
+export interface AdminDashboardStats {
+  totalCustomers: number;
+  totalLabs: number;
+  totalTests: number;
+  totalBookings: number;
+  pendingBookings: number;
+  confirmedBookings: number;
+  completedBookings: number;
+  cancelledBookings: number;
+}
+
+export interface AdminUser {
+  id: string;
+  name: string;
+  email: string;
+  phone: string | null;
+  role: string;
+  createdAt: string;
+}
+
+export interface AdminLab {
+  id: string;
+  name: string;
+  slug: string;
+  city: string;
+  area: string;
+  status: string;
+  rating: number;
+  reviewCount: number;
+  homeCollection: boolean;
+  createdAt: string;
+}
+
+export interface AdminBooking {
+  id: string;
+  reference: string;
+  status: string;
+  testName: string;
+  labName: string;
+  customerName: string;
+  customerEmail: string;
+  patientName: string;
+  patientPhone: string;
+  preferredDate: string;
+  preferredTime: string;
+  collectionMethod: string;
+  amount: number;
+  createdAt: string;
+}
+
+/** GET /api/admin/dashboard — admin summary stats. */
+export function fetchAdminDashboard(): Promise<AdminDashboardStats> {
+  return apiGet<AdminDashboardStats>("/api/admin/dashboard");
+}
+
+/** GET /api/admin/users — paginated user list. */
+export function fetchAdminUsers(params: { page?: number; limit?: number; search?: string } = {}): Promise<ApiList<AdminUser>> {
+  return apiGet<ApiList<AdminUser>>(`/api/admin/users${toQuery(params)}`);
+}
+
+/** GET /api/admin/labs — paginated lab list. */
+export function fetchAdminLabs(params: { page?: number; limit?: number; search?: string } = {}): Promise<ApiList<AdminLab>> {
+  return apiGet<ApiList<AdminLab>>(`/api/admin/labs${toQuery(params)}`);
+}
+
+/** GET /api/admin/bookings — paginated booking list. */
+export function fetchAdminBookings(params: { page?: number; limit?: number; status?: string } = {}): Promise<ApiList<AdminBooking>> {
+  return apiGet<ApiList<AdminBooking>>(`/api/admin/bookings${toQuery(params)}`);
+}
